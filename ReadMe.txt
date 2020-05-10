@@ -38,21 +38,12 @@ https://newsapi.org/docs/endpoints/everything
 
 
 **********************************
-// Insert an article and return the id of this insert.
-
-interface ArticleDao {
-	    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(article: Article): Long 
-    
-}
-
 *************************************
 
 In database Room just use primitive kind of data
 (Int, String...) -> Article::class
 If we have another Class -> Source::class
 we have to convert Source class to String to be capable to use in Room.
-
 
 TypeConverted	
 
@@ -80,8 +71,6 @@ data class Source {
 
 
  // To get all data (id and name) need to use Gson to convert into Json String
-
-
         @TypeConverter
         fun fromProfileData(source: Source): String {
             return Gson().toJson(source)
